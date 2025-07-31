@@ -10,7 +10,15 @@ external-ui: /usr/local/etc/clash/ui
 tun:
   mtu: 9000
   enable: true
-  stack: gvisor   #在pfSense上不能设置为system。
+  stack: gvisor   #如果使用mosdns进行dns分流，则不能设置为system
+  device: tun_3000
+  auto-route: true
+  strict-route: true
+  auto-detect-interface: true
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+
   device: tun_3000
   auto-route: true
   strict-route: true
