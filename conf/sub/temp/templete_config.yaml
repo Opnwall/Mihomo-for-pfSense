@@ -8,11 +8,11 @@ global-client-fingerprint: chrome
 external-controller: '0.0.0.0:9090'
 external-ui: /usr/local/etc/clash/ui
 tun:
-  enable: true
-  stack: gvisor   #在freebsd平台上不能设置为system。
-  device: tun_3000
   mtu: 9000
-  auto-route: false
+  enable: true
+  stack: gvisor   #在pfSense上不能设置为system。
+  device: tun_3000
+  auto-route: true
   strict-route: true
   auto-detect-interface: true
   dns-hijack:
