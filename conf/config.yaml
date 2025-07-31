@@ -9,11 +9,11 @@ external-controller: '0.0.0.0:9090'
 external-ui: /usr/local/etc/clash/ui
 secret: 123456
 tun:
+  mtu: 9000
   enable: true
   stack: gvisor   #在pfSense上不能设置为system。
   device: tun_3000
-  mtu: 9000
-  auto-route: false #可以设置为true
+  auto-route: true
   strict-route: true
   auto-detect-interface: true
   dns-hijack:
