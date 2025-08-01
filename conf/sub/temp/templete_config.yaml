@@ -10,7 +10,7 @@ external-ui: /usr/local/etc/clash/ui
 tun:
   mtu: 9000
   enable: true
-  stack: gvisor   #使用mosdns进行dns分流，不能设置为system。
+  stack: system
   device: tun_3000
   auto-route: true
   strict-route: true
