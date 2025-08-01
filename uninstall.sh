@@ -56,6 +56,6 @@ rm -f /usr/local/bin/mosdns
 echo ""
 
 # 完成提示
-log "$GREEN" "卸载完成，请手动删除TUN接口和网关、别名和防火墙分流规则，任务列表的自动更新项，删除shellcmd中的启动项，并将DNS解析器端口更改为53。"
+log "$GREEN" "卸载完成，请手动删除TUN接口和防火墙规则，任务列表的自动更新项，删除shellcmd中的启动项，并将DNS解析器端口更改为53。"
 log "$GREEN" "所有配置修改完成以后，运行/etc/rc.reload_all或重启防火墙，让新配置生效。"
 echo ""
