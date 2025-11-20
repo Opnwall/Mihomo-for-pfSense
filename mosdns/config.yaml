@@ -115,8 +115,8 @@ plugins:
     args:
       primary: domestic_sequence
       secondary: remote_sequence
-      threshold: 800
-      always_standby: true
+      threshold: 1800
+      always_standby: false
 
   - tag: "main_sequence"
     type: sequence
@@ -131,6 +131,8 @@ plugins:
       - matches: "qname $remote_domain_set"
         exec: goto remote_sequence
       - matches: "qname $direct_domain_set"
+        exec: goto domestic_sequence
+      - matches: "resp_ip $direct_ip"
         exec: goto domestic_sequence
       - exec: $fallback
 
