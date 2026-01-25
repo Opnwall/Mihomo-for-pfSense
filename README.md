@@ -28,6 +28,14 @@ sh install.sh
 sh uninstall.sh
 ```
 
-## 使用教程
+## 配置教程
+1. 安装完成，导航到VPN>Proxy Suite 菜单，修改clash（ proxies和rules部分) 内容并保存。
+2. 启动clash服务，转到接口>分配，将tun_3000虚拟网卡添加为接口并启用，不用输入IPv4地址和网关。
+3. 为避免端口冲突，将DNS解析器端口修改为5355，并作为mosdns的默认上游DNS。
+5. 转到防火墙>规则策略，在tun接口添加一条any to any防火墙规则，允许tun子网访问。
+6. 转到服务>shellcmd，添加两条开机启动条目，分别启动clash和mosdns。
+7. 设置完成，客户端访问 ip111.cn，检查分流是否正常。
 
-[pfSense 配置 clash(mihomo) 透明代理教程](https://pfchina.org/?p=10526)
+## 其他事项
+1. 默认配置文件开启了clash api功能，访问 http://lan_ip:9090/ui 登录仪表盘查看代理连接信息。
+2. 自动更新订阅，在cron插件当中添加一条任务，命令："/usr/bin/sub"。
