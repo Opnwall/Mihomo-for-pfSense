@@ -38,4 +38,4 @@ sh uninstall.sh
 
 ## 其他事项
 1. 默认配置文件开启了clash api功能，访问 http://lan_ip:9090/ui 登录仪表盘查看代理连接信息。
-2. 自动更新订阅，在cron插件当中添加一条任务，命令："/usr/bin/sub"。
+2. 自动更新订阅，在cron插件当中添加一条任务，命令为"/usr/bin/sub"。
