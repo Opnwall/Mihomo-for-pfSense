@@ -1,0 +1,99 @@
+#!/bin/sh
+
+# PROVIDE: mosdns
+# REQUIRE: SERVERS
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="mosdns"
+rcvar="mosdns_enable"  # 允许通过 rc.conf 控制启用
+
+desc="mosdns service"
+pidfile="/var/run/${name}.pid"
+logfile="/var/log/${name}.log"
+procname="/usr/local/bin/mosdns"
+command="/usr/sbin/daemon"
+command_interpreter="/bin/sh"
+required_files="/usr/local/bin/mosdns /usr/local/etc/mosdns/config.yaml"
+start_precmd="mosdns_prestart"
+stop_cmd="mosdns_stop"
+stop_postcmd="mosdns_poststop"
+status_cmd="mosdns_status"
+extra_commands="reload"
+reload_cmd="mosdns_reload"
+mosdns_env="IS_DAEMON=1"  # 设置环境变量
+
+# daemon 参数
+daemon_args="-P ${pidfile} -r -f -o ${logfile} -t ${name}:daemon"
+# mosdns 启动命令
+command_args="${daemon_args} env ${mosdns_env} /usr/local/bin/mosdns start --as-service -d /usr/local/etc/mosdns/"
+
+mosdns_prestart()
+{
+    touch "${logfile}"
+    rm -f "${pidfile}"
+}
+
+mosdns_stop()
+{
+    if [ -f "${pidfile}" ]; then
+        daemon_pid="$(cat "${pidfile}" 2>/dev/null)"
+        if [ -n "${daemon_pid}" ] && kill -0 "${daemon_pid}" 2>/dev/null; then
+            pkill -TERM -P "${daemon_pid}" 2>/dev/null || true
+            kill -TERM "${daemon_pid}" 2>/dev/null || return 1
+
+            for _ in 1 2 3 4 5 6 7 8 9 10; do
+                if ! kill -0 "${daemon_pid}" 2>/dev/null; then
+                    rm -f "${pidfile}"
+                    echo "${name} stopped."
+                    return 0
+                fi
+                sleep 1
+            done
+
+            pkill -KILL -P "${daemon_pid}" 2>/dev/null || true
+            kill -KILL "${daemon_pid}" 2>/dev/null || true
+            rm -f "${pidfile}"
+            echo "${name} force stopped."
+            return 0
+        fi
+    fi
+
+    echo "${name} is not running."
+    return 1
+}
+
+mosdns_poststop()
+{
+    rm -f "${pidfile}"
+}
+
+mosdns_status()
+{
+    if [ -f "${pidfile}" ] && kill -0 "$(cat "${pidfile}")" 2>/dev/null; then
+        echo "${name} is running as pid $(cat "${pidfile}")."
+        return 0
+    else
+        echo "${name} is not running."
+        return 1
+    fi
+}
+
+mosdns_reload()
+{
+    if [ -f "${pidfile}" ] && kill -0 "$(cat "${pidfile}")" 2>/dev/null; then
+        kill -HUP "$(cat "${pidfile}")" 2>/dev/null || return 1
+        echo "${name} config reloaded."
+        return 0
+    fi
+
+    echo "${name} is not running."
+    return 1
+}
+
+# 加载用户定义的配置
+load_rc_config $name
+: ${mosdns_enable:="NO"}  # 默认不启用
+
+run_rc_command "$1"
