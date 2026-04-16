@@ -33,6 +33,6 @@ sh uninstall.sh
 6. 启动服务，客户端访问 ip111.cn，检查分流是否正常。
 
 ## 其他事项
-1. 在 pfSense 上，mihomo 配置文件 stack 参数只能使用 gvisor栈。
+1. 经测试，pfSense 上的mihomo 配置文件 stack 参数只能使用 gvisor栈。
 2. 默认配置文件开启了 api 功能，访问 http://lan_ip:9090/ui 登录仪表盘。
 3. 转到 服务>cron，可以添加订阅和规则列表更新任务，命令路径分别为"/usr/bin/mihomo_sub"和"sh /usr/local/etc/mosdns/scripts/update.sh"。
