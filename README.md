@@ -35,4 +35,4 @@ sh uninstall.sh
 ## 其他事项
 1. 经测试，pfSense 的mihomo 配置文件 stack 参数只能使用 gvisor栈。
 2. 默认配置文件开启了 api 功能，访问 http://lan_ip:9090/ui 登录仪表盘。
-3. 转到 服务>cron，可以添加订阅和规则列表更新任务，命令路径分别为"/usr/bin/mihomo_sub"和"sh /usr/local/etc/mosdns/scripts/update.sh"。
+3. 订阅和规则列表更新可以在 服务>cron 添加任务实现，订阅更新命令为"/usr/bin/mihomo_sub"， mosdns规则列表更新命令为"sh /usr/local/etc/mosdns/scripts/update.sh"。
