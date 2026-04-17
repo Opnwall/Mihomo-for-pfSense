@@ -29,7 +29,7 @@ sh uninstall.sh
 2. 为避免端口冲突，检查 DNS 解析器端口是否修改为 5355 端口（可以作为 mosdns 的默认上游 DNS）。
 3. 检查 防火墙>规则策略，tun 接口是否有 any to any 防火墙规则，以允许 tun 子网访问。
 4. 导航到 服务>Shellcmd，检查是否已添加开机启动项。
-5. 导航到 VPN>Mihomo Proxy 菜单，修改 mihomo 配置并保存。
+5. 导航到 VPN>Mihomo 菜单，修改 mihomo 配置并保存。
 6. 启动服务，客户端访问 ip111.cn，检查分流是否正常。
 
 ## 其他事项
