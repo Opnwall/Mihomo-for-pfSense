@@ -2,7 +2,7 @@
 require_once("guiconfig.inc");
 require_once("services.inc");
 
-$pgtitle = [gettext('VPN'), gettext('MosDNS')];
+$pgtitle = [gettext('VPN'), gettext('Proxy'), gettext('MosDNS')];
 include("head.inc");
 
 $config_file = "/usr/local/etc/mosdns/config.yaml";

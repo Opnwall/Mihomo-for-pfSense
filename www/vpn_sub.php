@@ -2,7 +2,7 @@
 require_once("guiconfig.inc");
 require_once("services.inc");
 
-$pgtitle = [gettext('VPN'), gettext('Sub')];
+$pgtitle = [gettext('VPN'), gettext('Proxy'), gettext('Sub')];
 include("head.inc");
 
 define('ENV_FILE', '/usr/local/etc/mihomo/sub/env');

@@ -2,7 +2,7 @@
 require_once("guiconfig.inc");
 require_once("services.inc");
 
-$pgtitle = [gettext('VPN'), gettext('Mihomo')];
+$pgtitle = [gettext('VPN'), gettext('Proxy'), gettext('Mihomo')];
 include("head.inc");
 
 $config_file = "/usr/local/etc/mihomo/config.yaml";
