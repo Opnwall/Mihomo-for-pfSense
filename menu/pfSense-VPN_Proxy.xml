@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <packagegui>
 	<menu>
-		<name>Mihomo</name>
+		<name>Proxy</name>
 		<section>VPN</section>
 		<url>/vpn_mihomo.php</url>
 	</menu>
